@@ -5,9 +5,16 @@ const ActivitySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         required: true
+    },
+    subcategory: {
+        type: String,
     },
     description: {
         type: String,
@@ -18,25 +25,11 @@ const ActivitySchema = new mongoose.Schema({
         required: true
     }, 
     location: {
-        city:{
-            type: String,
-            required: true
-        },
-        address:{
-            type: String,
-            required: true
-        },
-        numaddress: {
-            type: Number,
-            required: true
-        }
-    },
-    startdate: {
-        type: Date,
+        type: String,
         required: true
     },
-    enddate: {
-        type: Date,
+    dates: {
+        type: String,
         required: true
     },
     price: {

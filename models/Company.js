@@ -6,18 +6,8 @@ const CompanySchema = new mongoose.Schema({
         required: true
     },
     location: {
-        city:{
-            type: String,
-            required: true
-        },
-        address:{
-            type: String,
-            required: true
-        },
-        numaddress: {
-            type: Number,
-            required: true
-        }
+        type: String,
+        required: true
     },
     phone:{
         type: Number,
@@ -28,6 +18,11 @@ const CompanySchema = new mongoose.Schema({
         required: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, ingresa un correo válido']
       },
+    web: {
+        type: String,
+        required: true,
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, ingresa un correo válido']
+    },
     imgUrl: {
         type: String,
         required: true
