@@ -1,6 +1,9 @@
 const mongoose = require ('mongoose');
 
 const ActivitySchema = new mongoose.Schema({
+    company: {
+        type: mongoose.Types.ObjectId, 
+        ref: "Company"},
     name: {
         type: String,
         required: true
@@ -19,25 +22,30 @@ const ActivitySchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
-    },
-    company: {
-        type: String,
-        required: true
     }, 
     location: {
-        type: String,
-        required: true
+        city: {
+            type: String,
+            required: true
+        }, 
+        address: {
+            type: String,
+            required: true
+        }
     },
     dates: {
         type: String,
         required: true
     },
     price: {
-        type: Number
+        type: String,
+        required: true
     },
     duration: {
         type: String,
-    }
+        required: true
+    },
+    
 }, { timestamps: true }
 )
 

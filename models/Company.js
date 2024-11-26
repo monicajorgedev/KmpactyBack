@@ -20,12 +20,12 @@ const CompanySchema = new mongoose.Schema({
       },
     web: {
         type: String,
-        required: true,
+        required: false,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, ingresa un correo válido']
     },
     imgUrl: {
         type: String,
-        required: true
+        required: false
     }
 }, { timestamps: true }
 )

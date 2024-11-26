@@ -1,4 +1,5 @@
 const Activity = require('../models/Activity')
+const Company = require('../models/Company')
 
 const ActivityController = {
     async getActivities (req, res) {
@@ -7,7 +8,7 @@ const ActivityController = {
             if (req.query.category) {
                 filters.category = req.query.category
             }
-            const activities = await Activity.find(filters);
+            const activities = await Activity.find(filters).populate('company');
             res.json(activities)
         } catch (err) {
             console.error('Error getting data', err)
@@ -15,7 +16,7 @@ const ActivityController = {
     },
     async getActivityByID (req, res) {
         try {
-            const activity = await Activity.findById(req.params.id)
+            const activity = await Activity.findById(req.params.id).populate('company')
             if (!activity) {
                 return res.status(404).json({message: 'Activity not found'})
             }
@@ -27,6 +28,8 @@ const ActivityController = {
     },
     async createActivity(req, res) {
         try {
+            const company = await Company.findById('67372b7e3922df3b54d4d50d')
+            req.body.company = company;
             const activity = await Activity.create(req.body)
             return res.json(activity)
         } catch (err) {
