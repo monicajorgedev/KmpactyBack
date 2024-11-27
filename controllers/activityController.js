@@ -7,6 +7,18 @@ const ActivityController = {
             const filters = {}
             if (req.query.category) {
                 filters.category = req.query.category
+            } 
+            if (req.query.type) {
+                filters.type = req.query.type
+            }
+            if (req.query.dates) {
+                filters.dates = req.query.dates
+            }
+            if (req.query.subcategory) {
+                filters.subcategory = req.query.subcategory
+            }
+            if (req.query.city) {
+                filters['location.city'] = req.query.city
             }
             const activities = await Activity.find(filters).populate('company');
             res.json(activities)
