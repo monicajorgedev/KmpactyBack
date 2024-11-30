@@ -26,6 +26,20 @@ const ActivityController = {
             console.error('Error getting data', err)
           }
     },
+    async getActivitiesByCompany (req, res) {
+
+        try {
+            const company = await Company.findOne({
+                uid: req.uid
+            })
+            const activities = await Activity.find({
+                company: company._id
+            }).populate('company');
+            res.json(activities)
+        } catch (err) {
+            console.error('Error getting data', err)
+          }
+    },
     async getActivityByID (req, res) {
         try {
             const activity = await Activity.findById(req.params.id).populate('company')
@@ -40,7 +54,9 @@ const ActivityController = {
     },
     async createActivity(req, res) {
         try {
-            const company = await Company.findById('67372b7e3922df3b54d4d50d')
+            const company = await Company.findOne({
+                uid: req.uid
+            })
             req.body.company = company;
             const activity = await Activity.create(req.body)
             return res.json(activity)
@@ -56,6 +72,7 @@ const ActivityController = {
                 category: req.body.category,
                 description: req.body.description,
                 company: req.body.company,
+                image: req.body.image,
                 location: {
                     city: req.body.location.city,
                     address: req.body.location.address,
@@ -70,7 +87,7 @@ const ActivityController = {
             const activity = await Activity.findByIdAndUpdate(
                 req.params.id, activityToUpdate,{new: true}
             )
-            res.redirect(`/activities/${req.params.id}`)
+            res.json(activity)
 
         } catch (err) {
             console.error('Error updating activity', err)

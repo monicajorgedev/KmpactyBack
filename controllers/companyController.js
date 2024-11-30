@@ -1,25 +1,15 @@
 const Company = require('../models/Company')
 
 const CompanyController = {
-    async getCompanies (req, res) {
+    async getCompany (req, res) {
         try {
-            const filters = {}
-            if (req.query.category) {
-                filters.category = req.query.category
+            const filters = {
+                uid: req.uid
             }
-            const companies = await Company.find(filters);
+            console.log(filters)
+            const companies = await Company.findOne(filters);
+            console.log(companies)
             res.json(companies)
-        } catch (err) {
-            console.error('Error getting the company', err)
-          }
-    },
-    async getCompanyByID(req, res) {
-        try {
-            const company = await Company.findById(req.params.id)
-            if (!company) {
-                return res.status(404).json({message: 'Company not found'})
-            }
-            return res.json(company)
         } catch (err) {
             console.error('Error getting the company', err)
           }
@@ -55,15 +45,5 @@ const CompanyController = {
             console.error('Error updating the company', err)
           }
     },
-    async deleteCompany(req, res) {
-        try {
-            const companyId = req.params.id
-            const company = await Company.findByIdAndDelete(companyId)
-            res.json(company)
-        } catch (err) {
-            console.error('Company could not be deleted', err)
-          }
-    },
-
 }
 module.exports = CompanyController
