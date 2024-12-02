@@ -34,7 +34,6 @@ const CompanyController = {
                 },
                 phone: req.body.phone,
                 email: req.body.email,
-                imgUrl: req.body.imgUrl
             }
 
             const company = await Company.findByIdAndUpdate(

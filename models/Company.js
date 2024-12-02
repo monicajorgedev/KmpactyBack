@@ -26,10 +26,6 @@ const CompanySchema = new mongoose.Schema({
         type: String,
         required: false,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, ingresa un correo válido']
-    },
-    imgUrl: {
-        type: String,
-        required: false
     }
 }, { timestamps: true }
 )
