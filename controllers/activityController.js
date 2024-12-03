@@ -4,7 +4,9 @@ const Company = require('../models/Company')
 const ActivityController = {
     async getActivities (req, res) {
         try {
-            const filters = {}
+            const filters = {
+                active: true
+            }
             if (req.query.category) {
                 filters.category = req.query.category
             } 
@@ -81,7 +83,8 @@ const ActivityController = {
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
                 price: req.body.price,
-                duration: req.body.duration
+                duration: req.body.duration,
+                active: req.body.active,
             }
 
             const activity = await Activity.findByIdAndUpdate(
